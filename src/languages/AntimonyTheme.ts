@@ -6,9 +6,10 @@ export const antimonyTheme: monaco.editor.IStandaloneThemeData = {
     colors: {},
     rules: [
       { token: 'other', foreground: '#FFFFFF' },
-      { token: 'model', foreground: '#6166BC' },
-      { token: 'species', foreground: '#b86e30' },
-      { token: 'compartment', foreground: '#846893' },
-      { token: 'comment', foreground: '#538649' },
+      { token: 'model', foreground: '#8185C9' },
+      { token: 'species', foreground: '#FD7F20' },
+      { token: 'compartment', foreground: '#BC96CA' },
+      { token: 'react', foreground: '#21B6A8' },
+      { token: 'comment', foreground: '#76B947' },
     ],
 };
