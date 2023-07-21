@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import * as monaco from "monaco-editor";
-import { myCustomLanguage } from "./languages/myCustomLanguage";
-import { myCustomTheme } from "./languages/myCustomTheme";
+import { antimonyLanguage } from "./languages/AntimonyLanguage";
+import { antimonyTheme } from "./languages/AntimonyTheme";
 
 const AntimonyEditor = () => {
   const editorRef = useRef<HTMLDivElement | null>(null);
@@ -9,12 +9,12 @@ const AntimonyEditor = () => {
   useEffect(() => {
     if (editorRef.current) {
       // Load the custom language
-      monaco.languages.register({ id: "myCustomLanguage" });
-      monaco.languages.setMonarchTokensProvider("myCustomLanguage", myCustomLanguage);
+      monaco.languages.register({ id: "antimony" });
+      monaco.languages.setMonarchTokensProvider("antimony", antimonyLanguage);
 
       // Load the custom theme
-      monaco.editor.defineTheme("myCustomTheme", myCustomTheme);
-      monaco.editor.setTheme("myCustomTheme");
+      monaco.editor.defineTheme("antimonyTheme", antimonyTheme);
+      monaco.editor.setTheme("antimonyTheme");
 
       // Create the Monaco Editor instance
       const editor = monaco.editor.create(editorRef.current, {
@@ -31,7 +31,7 @@ const AntimonyEditor = () => {
             " // Reactions:",
             " React0: B -> BL; comp1*(kf_0*B - kr_0*BL);",
           ].join("\n"),
-        language: "myCustomLanguage", // Use your custom language
+        language: "antimony", // Use your custom language
       });
 
       // Cleanup
