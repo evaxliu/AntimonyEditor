@@ -19,6 +19,7 @@ export const antimonyTheme: monaco.editor.IStandaloneThemeData = {
       { token: 'operator', foreground: '#45B1A6'},
       { token: 'comment', foreground: '#76B947' },
       { token: 'string', foreground: '#f2ab7c' },
-      { token: 'number', foreground: '#def9cb' }
+      { token: 'number', foreground: '#def9cb' },
+      { token: 'connected-parentheses', foreground: '#ffe628' },
     ],
 };

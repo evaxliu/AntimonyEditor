@@ -5,9 +5,10 @@ export const antimonyLanguage: monaco.languages.IMonarchLanguage = {
     root: [
       [/\/\/.*/, 'comment'],
       [/"[^"]*"/, 'string'], // Rule for anything surrounded by double quotation marks (")
+      [/\(|\)/, 'connected-parentheses'], // Rule for connected parentheses
       [/=>|->/, 'transform'],
       [/=|:=/, 'assign'],
-      ['\\-|\\+|\\*|\\/|\\^|\\;|at|in', 'operator'],
+      ['\\-|\\+|\\*|\\/|\\^|\\;|at|in|import|has', 'operator'],
       [
         /(?:identity|biological_entity_is|hasPart|part|isPartOf|parthood|isVersionOf|hypernym|hasVersion|version|isHomologTo|homolog|isDescribedBy|description|isEncodedBy|encoder|encodes|encodement|occursIn|container|hasProperty|property|isPropertyOf|propertyBearer|hasTaxon|taxon|sboTerm|model_entity_is|origin)/,
         'annotation'

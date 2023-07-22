@@ -1,11 +1,13 @@
 import React from "react";
-import AntimonyEditor from "./AntimonyEditor";
+import AntimonyEditor from "./Editor/AntimonyEditor";
 
 function App() {
   return (
     <div>
       <h1>The Official Antimony Web Code Editor</h1>
-      <AntimonyEditor />
+      <div>
+        <AntimonyEditor />
+      </div>
     </div>
   );
 }
