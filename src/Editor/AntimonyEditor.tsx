@@ -1,12 +1,44 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import * as monaco from 'monaco-editor';
 import { antimonyLanguage } from '../Languages/AntimonyLanguage';
 import { antimonyTheme } from '../Languages/AntimonyTheme';
+import { Tabs } from './Tabs'
+import { Uri } from 'monaco-editor';
+import {FileTreeEntry, SaveFileArgs} from "../FileExplorer/typedefs";
+import EventEmitter from "eventemitter3";
 
-const AntimonyEditor = () => {
+type Monaco = typeof monaco
+
+type Props = {
+  emitter: EventEmitter<string | symbol, any>;
+}
+
+const AntimonyEditor = ({emitter}: Props) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
 
+  const [getCurrentModel, setCurrentModel] = useState<Uri>();
+
   let editor: any;
+
+  const monacoRef = useRef<Monaco>();
+
+  const doSave = () => {
+    if (!!getCurrentModel) {
+        if (!!monacoRef.current) {
+            if (!!monacoRef.current.editor) {
+                const model = monacoRef.current.editor.getModel(getCurrentModel)
+                if (!!model) {
+                    const args: SaveFileArgs = {
+                        filepath: getCurrentModel.path,
+                        data: model.getValue(),
+                    }
+                    emitter.emit("DO_SAVE_FILE", args)
+                    console.log("done")
+                }
+            }
+        }
+    }
+}
 
   useEffect(() => {
     if (editorRef.current) {
@@ -54,7 +86,64 @@ const AntimonyEditor = () => {
     monaco.editor.getModel(editorUri);
   }
 
-  return <div id="ant-edit" ref={editorRef} style={{ width: '800px', height: '600px' }} />;
+  return (
+    <div>
+      {(getCurrentModel) &&
+      <>
+        <style>
+          {`
+            .smallbutton {
+                background-color: #444857;
+                border-radius: 2px;
+                border-style: dotted;
+                border-width: 1px;
+                color: #cccccc;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 1em;
+                font-weight: normal !important;
+                line-height: 1.2;
+                margin: 0 3px 0 0;
+                padding: 2px 7px;
+                position: relative;
+                text-align: center;
+                text-decoration: none !important;
+                text-overflow: ellipsis;
+                text-shadow: none;
+                white-space: nowrap;
+                }
+            .smallbutton:hover {
+                background-color: #5c5e73;
+                color: white;
+                }
+          `}
+        </style>
+        <div>
+          <Tabs/>
+        </div>
+        {!!getCurrentModel &&
+          <div style={{
+              "backgroundColor": "#343539",
+              "padding": "4px",
+              "paddingLeft": "10px",
+              "color": "white",
+          }}>
+            <button
+                style={{
+                    "lineHeight": 1,
+                }}
+                onClick={doSave}
+                className="btn btn-success">Save
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            {getCurrentModel.path}
+          </div>
+          }
+      </>
+      }
+      <div id="ant-edit" ref={editorRef} style={{ width: '1100px', height: '600px' }} />
+    </div>
+  );
 };
 
 let origAnt = [
