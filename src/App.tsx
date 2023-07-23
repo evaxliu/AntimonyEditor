@@ -61,11 +61,11 @@ const App = ({emitter}: Props) => {
               splitterSize='10px'
             >
               <div style={{"height": "100%", "overflowY": "scroll"}}>
-                <ShadowDom>
+                {/* <ShadowDom>
                     <div style={{"padding": "10px"}}>
                         <FiletreeRoot emitter={emitter}/>
                     </div>
-                </ShadowDom>
+                </ShadowDom> */}
                 <FileList />
               </div>
               <Split
