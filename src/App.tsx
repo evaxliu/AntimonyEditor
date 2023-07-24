@@ -10,7 +10,7 @@ type Props = {
 
 const App = ({emitter}: Props) => {
   return (
-    <>
+    <div className='app' style={{height: '100%'}}>
       <style>
         {`
           .wrapper {
@@ -54,11 +54,11 @@ const App = ({emitter}: Props) => {
               </a>
             </div>
           </div>
-          <div className="middle App" style={{"backgroundColor": "#262731"}}>
+          <div className="middle App" style={{"backgroundColor": "#1c1c1c", color:'white'}}>
             <Split
-              renderSplitter={() => <SolidSplitter/>}
-              initialPrimarySize='15%'
-              splitterSize='10px'
+              renderSplitter={() => <SolidSplitter />}
+              initialPrimarySize='12%'
+              splitterSize='5px'
             >
               <div style={{"height": "100%", "overflowY": "scroll"}}>
                 {/* <ShadowDom>
@@ -69,8 +69,8 @@ const App = ({emitter}: Props) => {
                 <FileList />
               </div>
               <Split
-                  renderSplitter={() => <SolidSplitter color="#474757"/>}
-                  splitterSize='10px'
+                  renderSplitter={() => <SolidSplitter />}
+                  splitterSize='5px'
                   horizontal
                   initialPrimarySize='80%'
               >
@@ -78,7 +78,7 @@ const App = ({emitter}: Props) => {
                   {/* <MultiFileEditor emitter={emitter}/> */}
                   <AntimonyEditor emitter={emitter}/>
                 </div>
-                Show website preview here.
+                Logs Here
                 <div style={{"padding": "100px", "width": "100%", "height": "100%"}}>
                   <div style={{"width": "100%", "height": "100%"}}>
                     <iframe style={{"width": "100%", "height": "100%"}}/>
@@ -87,9 +87,9 @@ const App = ({emitter}: Props) => {
               </Split>
             </Split>
           </div>
-        <div className="bottom">copyright 2022 Center for Reproducible Biomedical Models</div>
+          <div className="bottom" style={{backgroundColor: '#1c1c1c', color:'white'}}>Copyright © 2023 Center for Reproducible Biomedical Models</div>
       </div>
-    </>
+    </div>
   );
 }
 

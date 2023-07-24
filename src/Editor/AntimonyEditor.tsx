@@ -141,7 +141,7 @@ const AntimonyEditor = ({emitter}: Props) => {
           }
       </>
       }
-      <div id="ant-edit" ref={editorRef} style={{ width: '1100px', height: '600px' }} />
+      <div id="ant-edit" ref={editorRef} style={{ height: '80vh' }}/>
     </div>
   );
 };
