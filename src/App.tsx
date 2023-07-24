@@ -48,7 +48,7 @@ const App = ({emitter}: Props) => {
           <div className="top" style={{"fontSize": "2em"}}>
             The Official Antimony Web Code Editor
             <div className="float-end" style={{"fontSize": ".5em"}}>
-              <a href={"https://github.com/bootrino/reactoxide"}>
+              <a href={"https://reproduciblebiomodels.org/"}>
                 {/* <img style={{"width": "48px", "marginRight": "10px"}} src={"GitHub-Mark-Light-64px.png"}/> */}
                 https://reproduciblebiomodels.org/
               </a>
@@ -87,7 +87,7 @@ const App = ({emitter}: Props) => {
               </Split>
             </Split>
           </div>
-          <div className="bottom" style={{backgroundColor: '#1c1c1c', color:'white'}}>Copyright © 2023 Center for Reproducible Biomedical Models</div>
+          <div className="bottom" style={{backgroundColor: '#1c1c1c', color:'white'}}>Copyright © 2023 Center for Reproducible Biomedical Modeling</div>
       </div>
     </div>
   );
