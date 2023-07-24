@@ -1,7 +1,7 @@
 import {Split} from '@geoffcox/react-splitter';
 import {SolidSplitter} from './CustomSplitters';
-import AntimonyEditor from "./Editor/AntimonyEditor";
-import FileList from "./FileExplorer/FileList";
+import AntimonyEditor from "./editor/AntimonyEditor";
+import FileList from "./fileexplorer/FileList";
 import EventEmitter from "eventemitter3";
 
 type Props = {
@@ -45,7 +45,7 @@ const App = ({emitter}: Props) => {
         `}
       </style>
       <div className="wrapper">
-          <div className="top" style={{"fontSize": "2em"}}>
+          <div className="top" style={{"fontSize": "2em", textAlign: 'center'}}>
             The Official Antimony Web Code Editor
             <div className="float-end" style={{"fontSize": ".5em"}}>
               <a href={"https://reproduciblebiomodels.org/"}>
