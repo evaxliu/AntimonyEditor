@@ -61,6 +61,7 @@ const App = ({emitter}: Props) => {
               splitterSize='3px'
             >
               <div style={{"height": "100%", "overflowY": "scroll"}}>
+                <button>Upload</button>
                 {/* <ShadowDom>
                     <div style={{"padding": "10px"}}>
                         <FiletreeRoot emitter={emitter}/>
