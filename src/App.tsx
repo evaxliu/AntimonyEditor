@@ -56,9 +56,9 @@ const App = ({emitter}: Props) => {
           </div>
           <div className="middle App" style={{"backgroundColor": "#1c1c1c", color:'white'}}>
             <Split
-              renderSplitter={() => <SolidSplitter />}
+              renderSplitter={() => <SolidSplitter/>}
               initialPrimarySize='12%'
-              splitterSize='5px'
+              splitterSize='3px'
             >
               <div style={{"height": "100%", "overflowY": "scroll"}}>
                 {/* <ShadowDom>
@@ -70,7 +70,7 @@ const App = ({emitter}: Props) => {
               </div>
               <Split
                   renderSplitter={() => <SolidSplitter />}
-                  splitterSize='5px'
+                  splitterSize='3px'
                   horizontal
                   initialPrimarySize='80%'
               >

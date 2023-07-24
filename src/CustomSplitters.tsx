@@ -13,7 +13,7 @@ const fullDivCss = css`
 export const SolidSplitter = styled.div`
   ${fullDivCss}
   background: #474757;
-  cursor: col-resize;
+  cursor: resize;
 `;
 
 const stripeVars = css`
