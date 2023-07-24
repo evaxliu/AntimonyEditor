@@ -50,7 +50,7 @@ const App = ({emitter}: Props) => {
             <div className="float-end" style={{"fontSize": ".5em"}}>
               <a href={"https://github.com/bootrino/reactoxide"}>
                 {/* <img style={{"width": "48px", "marginRight": "10px"}} src={"GitHub-Mark-Light-64px.png"}/> */}
-                https://github.com/bootrino/reactoxide
+                https://reproduciblebiomodels.org/
               </a>
             </div>
           </div>
