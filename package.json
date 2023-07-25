@@ -10,13 +10,20 @@
     "@types/node": "^16.18.38",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "adm-zip": "^0.5.10",
+    "cors": "^2.8.5",
     "dedent": "^1.2.0",
     "monaco-editor": "^0.40.0",
+    "monaco-languageclient": "^6.2.0",
+    "node-fetch": "^3.3.1",
+    "pako": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "vscode": "^1.1.34",
+    "web-vitals": "^2.1.4",
+    "zlib": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/pako": "^2.0.0"
   }
 }

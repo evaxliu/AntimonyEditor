@@ -1,12 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as monaco from 'monaco-editor';
-import { antimonyLanguage } from '../Languages/AntimonyLanguage';
-import { antimonyTheme } from '../Languages/AntimonyTheme';
+import { antimonyLanguage } from '../languages/AntimonyLanguage';
+import { antimonyTheme } from '../languages/AntimonyTheme';
+import BiomodelBrowser from './BiomodelBrowser';
 
 const AntimonyEditor = () => {
   const editorRef = useRef<HTMLDivElement | null>(null);
 
   let editor: any;
+
+  const [sbmlContent, setSbmlContent] = useState('');
 
   useEffect(() => {
     if (editorRef.current) {
@@ -23,6 +26,8 @@ const AntimonyEditor = () => {
         value: origAnt,
         language: 'antimony', // Use your custom language
       });
+
+      getBiomodel('BIOMD0000000001');
 
       // Register the hover provider
       monaco.languages.registerHoverProvider('antimony', {
@@ -54,7 +59,29 @@ const AntimonyEditor = () => {
     monaco.editor.getModel(editorUri);
   }
 
-  return <div id="ant-edit" ref={editorRef} style={{ width: '800px', height: '600px' }} />;
+  async function getBiomodel(modelId: string) {
+    const searchUrl = `http://localhost:3001/download?models=${modelId}`;
+    
+    try {
+      const response = await fetch(searchUrl);
+      if (response.ok) {  
+        const result = await response.text();
+        setSbmlContent(result);
+        console.log('Downloaded SBML Content:', sbmlContent);
+      } else {
+        console.error('Unable to download biomodel');
+      }
+    } catch (error) {
+      console.error("The following error occured while fetching the biomodel: ", error);
+    }
+  }
+
+  return (
+    <div style={{display: "flex"}}>
+      <div id="ant-edit" ref={editorRef} style={{ width: '800px', height: '600px' }} />
+        <BiomodelBrowser sbmlContent={sbmlContent} />
+    </div>
+  );
 };
 
 let origAnt = [
