@@ -1,6 +1,6 @@
 # Antimony Web Editor - A Web Editor Designed to Support Modeling in the Antimony Modeling Language
 
-[![MIT License](https://img.shields.io/github/license/sys-bio/vscode-antimony)](https://github.com/sys-bio/vscode-antimony/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/github/license/sys-bio/vscode-antimony)](https://github.com/evaxliu/evaxliu.github.io/blob/master/LICENSE)
 
 #### [Repository](https://github.com/evaxliu/evaxliu.github.io)&nbsp;&nbsp;|&nbsp;&nbsp;[Issues](https://github.com/evaxliu/evaxliu.github.io/issues)&nbsp;&nbsp;|&nbsp;&nbsp;[Antimony Reference](https://tellurium.readthedocs.io/en/latest/antimony.html)&nbsp;&nbsp;|&nbsp;&nbsp;[tellurium](https://tellurium.readthedocs.io/en/latest/index.html)
 
