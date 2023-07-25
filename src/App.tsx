@@ -1,7 +1,7 @@
 import {Split} from '@geoffcox/react-splitter';
 import {SolidSplitter} from './CustomSplitters';
-import AntimonyEditor from "./editor1/AntimonyEditor";
-import FileList from "./fileexplorer1/FileList";
+import AntimonyEditor from "./editor/AntimonyEditor";
+import FileList from "./fileexplorer/FileList";
 import EventEmitter from "eventemitter3";
 
 type Props = {

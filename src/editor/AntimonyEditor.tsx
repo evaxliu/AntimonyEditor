@@ -4,7 +4,7 @@ import { antimonyLanguage } from '../languages/AntimonyLanguage';
 import { antimonyTheme } from '../languages/AntimonyTheme';
 import { Tabs } from './Tabs'
 import { Uri } from 'monaco-editor';
-import {FileTreeEntry, SaveFileArgs} from "../fileexplorer1/typedefs";
+import {FileTreeEntry, SaveFileArgs} from "../fileexplorer/typedefs";
 import EventEmitter from "eventemitter3";
 
 type Monaco = typeof monaco
