@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import AntimonyEditor from './editor/AntimonyEditor';
+import AntimonyEditor from './editor1/AntimonyEditor';
 
 // test('renders title', () => {
 //   render(<App />);

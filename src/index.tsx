@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import emitter from './fileexplorer/Emitter';
+import emitter from './fileexplorer1/Emitter';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
