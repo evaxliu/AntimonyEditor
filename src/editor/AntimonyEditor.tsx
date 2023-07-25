@@ -62,7 +62,7 @@ const AntimonyEditor = ({emitter}: Props) => {
           // Get the word at the current cursor position
           const word = model.getWordAtPosition(position);
           if (word) {
-            // Create a hover with the value "hi"
+            // Create a hover
             return {
               range: new monaco.Range(
                 position.lineNumber,
@@ -70,7 +70,7 @@ const AntimonyEditor = ({emitter}: Props) => {
                 position.lineNumber,
                 word.endColumn
               ),
-              contents: [{ value: 'hi' }],
+              contents: [{ value: 'This is a hover' }],
             };
           }
           return null; // No hover if no word is found
