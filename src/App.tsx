@@ -31,11 +31,11 @@ const App = ({emitter}: Props) => {
                   grid-area: top; 
                   padding: 12px; 
                   border-bottom: 3px solid #474757; 
-                  }
+          }
 
           .middle { 
                   grid-area: middle; 
-                  }
+          }
           
           .right {
                   grid-area: right; /* The new split component */
@@ -44,20 +44,20 @@ const App = ({emitter}: Props) => {
                   position: relative; /* Enable absolute positioning */
                   border-left: 3px solid #474757; /* Add a left border with the specified color */
                   padding-left: 10px; /* Add some left padding for spacing */
-                  }
+          }
           
           .menu-button {
                         position: absolute; /* Position the button absolutely */
                         top: 0; /* Position at the top of the "right" div */
                         left: 50%; /* Move the button to the center horizontally */
                         transform: translateX(-50%); /* Center the button using translate */
-                        }
+          }
 
           .bottom { 
                   grid-area: bottom;  
                   padding: 12px;
                   border-top: 3px solid #474757; 
-                  }
+          }
         `}
       </style>
       <div className="wrapper">
