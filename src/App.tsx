@@ -83,7 +83,7 @@ const App = ({emitter}: Props) => {
                     </div>
                 </ShadowDom> */}
                 <FileList />
-                <button>Upload Files</button> <br/> <br/>
+                <button style={{cursor:'pointer'}}>Upload Files</button> <br/> <br/>
                 <a> File Tree Goes Here </a>
               </div>        
               <Split
@@ -106,7 +106,7 @@ const App = ({emitter}: Props) => {
             </Split>
           </div>
           <div className="right">
-            <button className='menu-button'>Create Annotations</button>
+            <button className='menu-button' style={{cursor:'pointer'}}>Create Annotations</button>
           </div>
           <div className="bottom" style={{backgroundColor: '#1c1c1c', color:'white'}}>Copyright © 2023 Center for Reproducible Biomedical Modeling</div>
       </div>
