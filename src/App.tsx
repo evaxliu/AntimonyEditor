@@ -15,14 +15,14 @@ const App = ({emitter}: Props) => {
         {`
           .wrapper {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 8%; /* Two columns: one for the middle app, one for the new split component */
             grid-template-rows: auto 1fr auto;
             gap: 0px 0px;
             grid-auto-flow: row;
             grid-template-areas:
-              "top"
-              "middle"
-              "bottom";
+              "top top"
+              "middle right" /* The new split component will go on the right */
+              "bottom bottom";
             width: 100%;
             height: 100%;
           }
@@ -36,6 +36,22 @@ const App = ({emitter}: Props) => {
           .middle { 
                   grid-area: middle; 
                   }
+          
+          .right {
+                  grid-area: right; /* The new split component */
+                  background-color: #1c1c1c;
+                  color: white;
+                  position: relative; /* Enable absolute positioning */
+                  border-left: 3px solid #474757; /* Add a left border with the specified color */
+                  padding-left: 10px; /* Add some left padding for spacing */
+                  }
+          
+          .menu-button {
+                        position: absolute; /* Position the button absolutely */
+                        top: 0; /* Position at the top of the "right" div */
+                        left: 50%; /* Move the button to the center horizontally */
+                        transform: translateX(-50%); /* Center the button using translate */
+                        }
 
           .bottom { 
                   grid-area: bottom;  
@@ -67,7 +83,9 @@ const App = ({emitter}: Props) => {
                     </div>
                 </ShadowDom> */}
                 <FileList />
-              </div>
+                <button>Upload Files</button> <br/> <br/>
+                <a> File Tree Goes Here </a>
+              </div>        
               <Split
                   renderSplitter={() => <SolidSplitter />}
                   splitterSize='3px'
@@ -86,6 +104,9 @@ const App = ({emitter}: Props) => {
                 </div>
               </Split>
             </Split>
+          </div>
+          <div className="right">
+            <button className='menu-button'>Create Annotations</button>
           </div>
           <div className="bottom" style={{backgroundColor: '#1c1c1c', color:'white'}}>Copyright © 2023 Center for Reproducible Biomedical Modeling</div>
       </div>

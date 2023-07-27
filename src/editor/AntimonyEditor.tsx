@@ -70,7 +70,7 @@ const AntimonyEditor = ({emitter}: Props) => {
                 position.lineNumber,
                 word.endColumn
               ),
-              contents: [{ value: 'This is a hover' }],
+              contents: [{ value: word.word }, { value: 'This is a hover' }],
             };
           }
           return null; // No hover if no word is found
