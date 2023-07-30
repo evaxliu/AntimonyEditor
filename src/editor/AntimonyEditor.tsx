@@ -6,156 +6,15 @@ import { Tabs } from './Tabs'
 import { Uri } from 'monaco-editor';
 import {FileTreeEntry, SaveFileArgs} from "../fileexplorer/typedefs";
 import EventEmitter from "eventemitter3";
+// import parseAntimonyModel from '../languages/AntimonyParser'
+import { parseAntimonyModel } from '../languages/AntimonyParser'
+
 
 type Monaco = typeof monaco
 
 type Props = {
   emitter: EventEmitter<string | symbol, any>;
 }
-
-const AntimonyEditor = ({emitter}: Props) => {
-  const editorRef = useRef<HTMLDivElement | null>(null);
-
-  const [getCurrentModel, setCurrentModel] = useState<Uri>();
-
-  let editor: any;
-
-  const monacoRef = useRef<Monaco>();
-
-  const doSave = () => {
-    if (!!getCurrentModel) {
-        if (!!monacoRef.current) {
-            if (!!monacoRef.current.editor) {
-                const model = monacoRef.current.editor.getModel(getCurrentModel)
-                if (!!model) {
-                    const args: SaveFileArgs = {
-                        filepath: getCurrentModel.path,
-                        data: model.getValue(),
-                    }
-                    emitter.emit("DO_SAVE_FILE", args)
-                    console.log("done")
-                }
-            }
-        }
-    }
-}
-
-  useEffect(() => {
-    if (editorRef.current) {
-      // Load the custom language
-      monaco.languages.register({ id: 'antimony' });
-      monaco.languages.setMonarchTokensProvider('antimony', antimonyLanguage);
-
-      // Load the custom theme
-      monaco.editor.defineTheme('antimonyTheme', antimonyTheme);
-      monaco.editor.setTheme('antimonyTheme');
-
-      // Create the Monaco Editor instance
-      editor = monaco.editor.create(editorRef.current, {
-        bracketPairColorization: { enabled: true }, // Enable bracket pair colorization
-        value: newAnt2,
-        language: 'antimony', // Use your custom language
-      });
-
-      // Set language configuration for bracket pair colorization
-      monaco.languages.setLanguageConfiguration('antimony', {
-        brackets: [
-          ['{', '}'],
-          ['[', ']'],
-          ['(', ')'],
-          // Add any other bracket pairs used in your language, including nested ones
-        ],
-      });
-
-      // Register the hover provider
-      monaco.languages.registerHoverProvider('antimony', {
-        provideHover: (model, position) => {
-          // Get the word at the current cursor position
-          const word = model.getWordAtPosition(position);
-          if (word) {
-            // Create a hover
-            return {
-              range: new monaco.Range(
-                position.lineNumber,
-                word.startColumn,
-                position.lineNumber,
-                word.endColumn
-              ),
-              contents: [{ value: word.word }, { value: 'This is a hover' }],
-            };
-          }
-          return null; // No hover if no word is found
-        },
-      });
-
-      // Cleanup
-      return () => editor.dispose();
-    }
-  }, []);
-
-  function save(editorUri: monaco.Uri) {
-    monaco.editor.getModel(editorUri);
-  }
-
-  return (
-    <div>
-      {(getCurrentModel) &&
-      <>
-        <style>
-          {`
-            .smallbutton {
-                background-color: #444857;
-                border-radius: 2px;
-                border-style: dotted;
-                border-width: 1px;
-                color: #cccccc;
-                cursor: pointer;
-                display: inline-block;
-                font-size: 1em;
-                font-weight: normal !important;
-                line-height: 1.2;
-                margin: 0 3px 0 0;
-                padding: 2px 7px;
-                position: relative;
-                text-align: center;
-                text-decoration: none !important;
-                text-overflow: ellipsis;
-                text-shadow: none;
-                white-space: nowrap;
-                }
-            .smallbutton:hover {
-                background-color: #5c5e73;
-                color: white;
-                }
-          `}
-        </style>
-        <div>
-          <Tabs/>
-        </div>
-        {!!getCurrentModel &&
-          <div style={{
-              "backgroundColor": "#343539",
-              "padding": "4px",
-              "paddingLeft": "10px",
-              "color": "white",
-          }}>
-            <button
-                style={{
-                    "lineHeight": 1,
-                }}
-                onClick={doSave}
-                className="btn btn-success">Save
-            </button>
-            &nbsp;&nbsp;&nbsp;
-            {getCurrentModel.path}
-          </div>
-          }
-      </>
-      }
-      <div id="ant-edit" ref={editorRef} style={{ height: '80vh' }}/>
-    </div>
-  );
-};
 
 let origAnt = [
   '// Created by libAntimony v2.12.0.3',
@@ -931,4 +790,162 @@ Model_1 homolog "http://identifiers.org/reactome/REACT_1383"
 Model_1 hypernym "http://identifiers.org/go/GO:0006096"
 Model_1 identity "http://identifiers.org/kegg.pathway/tbr00010"
 `
+
+const AntimonyEditor = ({emitter}: Props) => {
+  const editorRef = useRef<HTMLDivElement | null>(null);
+
+  const [getCurrentModel, setCurrentModel] = useState<Uri>();
+
+  let editor: any;
+
+  const monacoRef = useRef<Monaco>();
+
+  const doSave = () => {
+    if (!!getCurrentModel) {
+        if (!!monacoRef.current) {
+            if (!!monacoRef.current.editor) {
+                const model = monacoRef.current.editor.getModel(getCurrentModel)
+                if (!!model) {
+                    const args: SaveFileArgs = {
+                        filepath: getCurrentModel.path,
+                        data: model.getValue(),
+                    }
+                    emitter.emit("DO_SAVE_FILE", args)
+                    console.log("done")
+                }
+            }
+        }
+    }
+}
+
+  useEffect(() => {
+    if (editorRef.current) {
+      // Load the custom language
+      monaco.languages.register({ id: 'antimony' });
+      monaco.languages.setMonarchTokensProvider('antimony', antimonyLanguage);
+
+      // Load the custom theme
+      monaco.editor.defineTheme('antimonyTheme', antimonyTheme);
+      monaco.editor.setTheme('antimonyTheme');
+
+      // Create the Monaco Editor instance
+      editor = monaco.editor.create(editorRef.current, {
+        bracketPairColorization: { enabled: true }, // Enable bracket pair colorization
+        value: newAnt2,
+        language: 'antimony', // Use your custom language
+      });
+
+      // Set language configuration for bracket pair colorization
+      monaco.languages.setLanguageConfiguration('antimony', {
+        brackets: [
+          ['{', '}'],
+          ['[', ']'],
+          ['(', ')'],
+          // Add any other bracket pairs used in your language, including nested ones
+        ],
+      });
+
+      let parsedModel = parseAntimonyModel(editor.getValue());
+      console.log(parsedModel)
+
+      // Register the hover provider
+      monaco.languages.registerHoverProvider('antimony', {
+        provideHover: (model, position) => {
+          // Get the word at the current cursor position
+          const word = model.getWordAtPosition(position);
+          let parsedWord: any;
+          if (word) {
+            if (parsedModel.compartments.has(word.word)) {
+              parsedWord = ""
+            } else if (parsedModel.reactions.has(word.word)) {
+              parsedWord = "(reaction) ";
+            } else if (parsedModel.species.has(word.word)) {
+              parsedWord = "(species) \n In compartment: " + parsedModel.species.get(word.word)?.compartment;
+            } 
+            // Create a hover
+            return {
+              range: new monaco.Range(
+                position.lineNumber,
+                word.startColumn,
+                position.lineNumber,
+                word.endColumn
+              ),
+              contents: [{ value: word.word }, { value: parsedWord }],
+            };
+          }
+          return null; // No hover if no word is found
+        },
+      });
+
+      // Cleanup
+      return () => editor.dispose();
+    }
+  }, []);
+
+  function save(editorUri: monaco.Uri) {
+    monaco.editor.getModel(editorUri);
+  }
+
+  // console.log(parseAntimonyModel(newAnt));
+
+  return (
+    <div>
+      {(getCurrentModel) &&
+      <>
+        <style>
+          {`
+            .smallbutton {
+                background-color: #444857;
+                border-radius: 2px;
+                border-style: dotted;
+                border-width: 1px;
+                color: #cccccc;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 1em;
+                font-weight: normal !important;
+                line-height: 1.2;
+                margin: 0 3px 0 0;
+                padding: 2px 7px;
+                position: relative;
+                text-align: center;
+                text-decoration: none !important;
+                text-overflow: ellipsis;
+                text-shadow: none;
+                white-space: nowrap;
+                }
+            .smallbutton:hover {
+                background-color: #5c5e73;
+                color: white;
+                }
+          `}
+        </style>
+        <div>
+          <Tabs/>
+        </div>
+        {!!getCurrentModel &&
+          <div style={{
+              "backgroundColor": "#343539",
+              "padding": "4px",
+              "paddingLeft": "10px",
+              "color": "white",
+          }}>
+            <button
+                style={{
+                    "lineHeight": 1,
+                }}
+                onClick={doSave}
+                className="btn btn-success">Save
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            {getCurrentModel.path}
+          </div>
+          }
+      </>
+      }
+      <div id="ant-edit" ref={editorRef} style={{ height: '80vh' }}/>
+    </div>
+  );
+};
+
 export default AntimonyEditor;
