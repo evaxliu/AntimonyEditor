@@ -856,8 +856,9 @@ const AntimonyEditor = ({emitter}: Props) => {
           let hoverContents: monaco.IMarkdownString[] = [];
       
           if (word) {
-            if (parsedModel.reactions.has(word.word)) {
-              hoverContents.push({ value: '**(reaction)**' });
+            if (parsedModel.displays.has(word.word)){
+              const displayName = parsedModel.displays.get(word.word);
+              hoverContents.push({ value: `"${displayName?.name}"`})
             }
             if (parsedModel.species.has(word.word)) {
               const speciesInfo = parsedModel.species.get(word.word);
@@ -866,13 +867,13 @@ const AntimonyEditor = ({emitter}: Props) => {
                 { value: `In compartment: ${speciesInfo?.compartment}` }
               );
             }
+            if (parsedModel.reactions.has(word.word)) {
+              const reactInfo = parsedModel.reactions.get(word.word);
+              hoverContents.push({ value: `**(reaction)** ${reactInfo?.name}` });
+            }
             if (parsedModel.initializations.has(word.word)) {
               const initializationInfo = parsedModel.initializations.get(word.word);
               hoverContents.push({ value: `Initialized Value: ${initializationInfo?.value}` });
-            }
-            if (parsedModel.displays.has(word.word)){
-              const displayName = parsedModel.displays.get(word.word);
-              hoverContents.push({ value: `"${displayName?.name}"`})
             }
             return {
               range: new monaco.Range(position.lineNumber, word.startColumn, position.lineNumber, word.endColumn),

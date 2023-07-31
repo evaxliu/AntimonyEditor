@@ -1,7 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Antimony Editor",
+  "name": "Antimony Editor",
   "icons": [
+    {
+      "src": "antimony.ico"
+    }
   ],
   "start_url": ".",
   "display": "standalone",
