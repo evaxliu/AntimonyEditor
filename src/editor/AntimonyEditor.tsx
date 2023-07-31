@@ -847,6 +847,7 @@ const AntimonyEditor = ({emitter}: Props) => {
       });
 
       let parsedModel = parseAntimonyModel(editor.getValue());
+      console.log(parsedModel)
 
       // Register the hover provider
       monaco.languages.registerHoverProvider('antimony', {
@@ -871,7 +872,6 @@ const AntimonyEditor = ({emitter}: Props) => {
             }
             if (parsedModel.displays.has(word.word)){
               const displayName = parsedModel.displays.get(word.word);
-              console.log(`${displayName?.name}`)
               hoverContents.push({ value: `"${displayName?.name}"`})
             }
             return {

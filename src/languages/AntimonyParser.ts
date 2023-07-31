@@ -155,8 +155,6 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
         match = line.match(/([^=]+) is "(.+)";/);
         if (match) {
           const varName = match[1].trim();
-          console.log(varName)
-          console.log(match[2].trim())
           model.displays.set(varName, { 
             var: varName, 
             name: match[2].trim()
