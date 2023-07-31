@@ -61,10 +61,13 @@ const AntimonyEditor = () => {
 
   async function getBiomodel(modelId: string) {
     const searchUrl = `http://localhost:3001/download?models=${modelId}`;
+    // const searchUrl = `http://www.ebi.ac.uk/biomodels/search/download?models=${modelId}`;
+    // const searchUrl = `https://www.ebi.ac.uk/biomodels/model/download/${modelId}?filename=${modelId}.xml`;
     
     try {
       const response = await fetch(searchUrl);
-      if (response.ok) {  
+      console.log('Response:', response.ok);
+      if (response.ok) {
         const result = await response.text();
         setSbmlContent(result);
         console.log('Downloaded SBML Content:', sbmlContent);
