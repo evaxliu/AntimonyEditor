@@ -8,6 +8,7 @@ import {FileTreeEntry, SaveFileArgs} from "../fileexplorer/typedefs";
 import EventEmitter from "eventemitter3";
 // import parseAntimonyModel from '../languages/AntimonyParser'
 import { parseAntimonyModel } from '../languages/AntimonyParser'
+import { hover } from '@testing-library/user-event/dist/hover';
 
 
 type Monaco = typeof monaco
@@ -846,34 +847,40 @@ const AntimonyEditor = ({emitter}: Props) => {
       });
 
       let parsedModel = parseAntimonyModel(editor.getValue());
-      console.log(parsedModel)
 
       // Register the hover provider
       monaco.languages.registerHoverProvider('antimony', {
         provideHover: (model, position) => {
-          // Get the word at the current cursor position
           const word = model.getWordAtPosition(position);
-          let parsedWord: any;
+          let hoverContents: monaco.IMarkdownString[] = [];
+      
           if (word) {
-            if (parsedModel.compartments.has(word.word)) {
-              parsedWord = ""
-            } else if (parsedModel.reactions.has(word.word)) {
-              parsedWord = "(reaction) ";
-            } else if (parsedModel.species.has(word.word)) {
-              parsedWord = "(species) \n In compartment: " + parsedModel.species.get(word.word)?.compartment;
-            } 
-            // Create a hover
+            if (parsedModel.reactions.has(word.word)) {
+              hoverContents.push({ value: '**(reaction)**' });
+            }
+            if (parsedModel.species.has(word.word)) {
+              const speciesInfo = parsedModel.species.get(word.word);
+              hoverContents.push(
+                { value: `**(species)** ${speciesInfo?.name}`},
+                { value: `In compartment: ${speciesInfo?.compartment}` }
+              );
+            }
+            if (parsedModel.initializations.has(word.word)) {
+              const initializationInfo = parsedModel.initializations.get(word.word);
+              hoverContents.push({ value: `Initialized Value: ${initializationInfo?.value}` });
+            }
+            if (parsedModel.displays.has(word.word)){
+              const displayName = parsedModel.displays.get(word.word);
+              console.log(`${displayName?.name}`)
+              hoverContents.push({ value: `"${displayName?.name}"`})
+            }
             return {
-              range: new monaco.Range(
-                position.lineNumber,
-                word.startColumn,
-                position.lineNumber,
-                word.endColumn
-              ),
-              contents: [{ value: word.word }, { value: parsedWord }],
+              range: new monaco.Range(position.lineNumber, word.startColumn, position.lineNumber, word.endColumn),
+              contents: hoverContents,
             };
           }
-          return null; // No hover if no word is found
+      
+          return null;
         },
       });
 
