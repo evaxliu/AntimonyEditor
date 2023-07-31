@@ -8,7 +8,8 @@ export const antimonyLanguage: monaco.languages.IMonarchLanguage = {
       [/\(|\)/, 'connected-parentheses'], // Rule for connected parentheses
       [/=>|->/, 'transform'],
       [/=|:=/, 'assign'],
-      ['\\-|\\+|\\*|\\/|\\^|\\;|at|in|import|has', 'keywords-operator'],
+      ['\\-|\\+|\\*|\\/|\\^|\\;', 'operator'],
+      ['\\b(at|in|import|has)\\b', 'keywords'],
       [
         /(?:identity|biological_entity_is|hasPart|part|isPartOf|parthood|isVersionOf|hypernym|hasVersion|version|isHomologTo|homolog|isDescribedBy|description|isEncodedBy|encoder|encodes|encodement|occursIn|container|hasProperty|property|isPropertyOf|propertyBearer|hasTaxon|taxon|sboTerm|model_entity_is|origin)/,
         'annotation'

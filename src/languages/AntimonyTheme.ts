@@ -15,7 +15,8 @@ export const antimonyTheme: monaco.editor.IStandaloneThemeData = {
 
       { token: 'var', foreground: '#9CDCFE' },
 
-      { token: 'keywords-operator', foreground: '#45B1A6'},
+      { token: 'keywords', foreground: '#45B1A6'},
+      { token: 'operator', foreground: '#45B1A6'},
 
       { token: 'function', foreground: '#8185C9' },
       { token: 'model', foreground: '#8185C9' },
