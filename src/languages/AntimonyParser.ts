@@ -161,7 +161,6 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
         if (match) {
           const variable = match[1].trim().split(" ")[0];
           const annotation = match[2].trim();
-          console.log(variable)
           if (variable !== "") {
             if (model.annotations.has(variable)) {
               model.annotations.set(variable, {
