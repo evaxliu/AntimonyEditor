@@ -877,6 +877,14 @@ const AntimonyEditor = ({emitter}: Props) => {
                 { value: `**(function)** ${functionInfo?.name}` },
                 { value: `${functionInfo?.function}` });
             }
+            if (parsedModel.reactions.has(word.word)) {
+              const reactInfo = parsedModel.reactions.get(word.word);
+              hoverContents.push({ value: `**(reaction)** ${reactInfo?.name}` });
+            }
+            if (parsedModel.initializations.has(word.word)) {
+              const initializationInfo = parsedModel.initializations.get(word.word);
+              hoverContents.push({ value: `Initialized Value: ${initializationInfo?.value}` });
+            }
             if (parsedModel.annotations.has(word.word)) {
               const annotationInfo = parsedModel.annotations.get(word.word);
               const annots = annotationInfo?.annotation.split(',');
@@ -885,14 +893,6 @@ const AntimonyEditor = ({emitter}: Props) => {
                   hoverContents.push({ value: `${annots[i]}` });
                 }
               }
-            }
-            if (parsedModel.reactions.has(word.word)) {
-              const reactInfo = parsedModel.reactions.get(word.word);
-              hoverContents.push({ value: `**(reaction)** ${reactInfo?.name}` });
-            }
-            if (parsedModel.initializations.has(word.word)) {
-              const initializationInfo = parsedModel.initializations.get(word.word);
-              hoverContents.push({ value: `Initialized Value: ${initializationInfo?.value}` });
             }
             return {
               range: new monaco.Range(position.lineNumber, word.startColumn, position.lineNumber, word.endColumn),
