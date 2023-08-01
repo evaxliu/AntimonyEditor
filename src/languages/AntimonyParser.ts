@@ -17,6 +17,16 @@ interface Declaration {
   value: string | number;
 }
 
+interface Function {
+  name: string;
+  function: string;
+}
+
+interface Annotation {
+  variable: string;
+  annotation: string;
+}
+
 interface Initialization {
   name: string;
   value: string;
@@ -31,6 +41,8 @@ interface AntimonyModel {
   compartments: Map<string, Compartment>;
   species: Map<string, Species>;
   reactions: Map<string, Reaction>;
+  functions: Map<string, Function>;
+  annotations: Map<string, Annotation>;
   declarations: Map<string, Declaration>;
   initializations: Map<string, Initialization>;
   displays: Map<string, Display>;
@@ -42,13 +54,16 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
     compartments: new Map(),
     species: new Map(),
     reactions: new Map(),
+    functions: new Map(),
+    annotations: new Map(),
     declarations: new Map(),
     initializations: new Map(),
     displays: new Map()
   };
 
-  let currentSection: 'compartments' | 'species' | 'reactions' | 'declarations' | 'initializations' | 'displays' | null = null;
+  let currentSection: 'compartments' | 'species' | 'reactions' | 'declarations' | 'initializations' | 'displays' | 'annotations' | 'functions' | null = null;
   let lastCompartment: string | null = null;
+  let lastAnnotVar: string | "";
 
   lines.forEach((line) => {
     if (line.trim().startsWith('//')) {
@@ -75,6 +90,14 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
 
     if (line.includes(':')) {
       currentSection = 'reactions';
+    }
+    
+    if (line.trim().startsWith('function')) {
+      currentSection = 'functions';
+    }
+
+    if (line.includes('http')) {
+      currentSection = 'annotations';
     }
 
     if (line.includes('=')) {
@@ -120,6 +143,44 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
               model.species.set(speciesName, { name: speciesName, compartment: 'default' });
             }
           });
+        }
+        break;
+      case 'functions':
+        match = line.match(/function (.+)/);
+        if (match) {
+          const functionArgs = match[1].trim();
+          const functionName = functionArgs.split('(')[0];
+          model.functions.set(functionName, {
+            name: functionName,
+            function: functionArgs
+          });
+        }
+        break;
+      case 'annotations':
+        match = line.match(/(.+) "([^"]+)"/);
+        if (match) {
+          const variable = match[1].trim().split(" ")[0];
+          const annotation = match[2].trim();
+          console.log(variable)
+          if (variable !== "") {
+            if (model.annotations.has(variable)) {
+              model.annotations.set(variable, {
+                variable: variable,
+                annotation: model.annotations.get(variable)?.annotation + "," + annotation
+              });
+            } else {
+              model.annotations.set(variable, {
+                variable: variable,
+                annotation: annotation
+              });
+              lastAnnotVar = variable;
+            }
+          } else {
+            model.annotations.set(lastAnnotVar, {
+              variable: lastAnnotVar,
+              annotation: model.annotations.get(lastAnnotVar)?.annotation + "," + annotation
+            });
+          }
         }
         break;
       case 'reactions':
