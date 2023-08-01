@@ -862,29 +862,36 @@ const AntimonyEditor = ({emitter}: Props) => {
             if (parsedModel.displays.has(word.word)){
               const displayName = parsedModel.displays.get(word.word);
               hoverContents.push(
-                { supportHtml : true,
+                { supportHtml: true,
                   value: `<span style="color:#f2ab7c;">"${displayName?.name}"</span>`})
             }
             if (parsedModel.species.has(word.word)) {
               const speciesInfo = parsedModel.species.get(word.word);
               hoverContents.push(
-                { supportHtml : true,
+                { supportHtml: true,
                   value: `(<span style="color:#FD7F20;">**species**</span>) ${speciesInfo?.name}`},
-                { supportHtml : true,
+                { supportHtml: true,
                   value: `In <span style="color:#BC96CA;">**compartment**</span>: ${speciesInfo?.compartment}` }
               );
+            }
+            if (parsedModel.units.has(word.word)) {
+              const unitInfo = parsedModel.units.get(word.word);
+              hoverContents.push(
+                { supportHtml: true,
+                  value: `(<span style="color:#4954F5;">**unit**</span>) ${unitInfo?.name}` },
+                { value: `${unitInfo?.unit}` });
             }
             if (parsedModel.functions.has(word.word)) {
               const functionInfo = parsedModel.functions.get(word.word);
               hoverContents.push(
-                { supportHtml : true,
+                { supportHtml: true,
                   value: `(<span style="color:#8185C9;">**function**</span>) ${functionInfo?.name}` },
                 { value: `${functionInfo?.function}` });
             }
             if (parsedModel.reactions.has(word.word)) {
               const reactInfo = parsedModel.reactions.get(word.word);
               hoverContents.push(
-                { supportHtml : true,
+                { supportHtml: true,
                   value: `(<span style="color:#4DC5B9;">**reaction**</span>) ${reactInfo?.name}` });
             }
             if (parsedModel.initializations.has(word.word)) {

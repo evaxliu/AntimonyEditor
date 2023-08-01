@@ -27,6 +27,11 @@ interface Annotation {
   annotation: string;
 }
 
+interface Unit {
+  name: string;
+  unit: string;
+}
+
 interface Initialization {
   name: string;
   value: string;
@@ -43,6 +48,7 @@ interface AntimonyModel {
   reactions: Map<string, Reaction>;
   functions: Map<string, Function>;
   annotations: Map<string, Annotation>;
+  units: Map<string, Unit>;
   declarations: Map<string, Declaration>;
   initializations: Map<string, Initialization>;
   displays: Map<string, Display>;
@@ -56,12 +62,13 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
     reactions: new Map(),
     functions: new Map(),
     annotations: new Map(),
+    units: new Map(),
     declarations: new Map(),
     initializations: new Map(),
     displays: new Map()
   };
 
-  let currentSection: 'compartments' | 'species' | 'reactions' | 'declarations' | 'initializations' | 'displays' | 'annotations' | 'functions' | null = null;
+  let currentSection: 'compartments' | 'species' | 'reactions' | 'declarations' | 'initializations' | 'displays' | 'annotations' | 'functions' | 'units' | null = null;
   let lastCompartment: string | null = null;
   let lastAnnotVar: string | "";
 
@@ -110,6 +117,10 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
 
     if (line.trim().startsWith('var ') || line.trim().startsWith('const ')) {
       currentSection = 'declarations';
+    }
+
+    if (line.trim().startsWith('unit')) {
+      currentSection = 'units';
     }
 
     let match;
@@ -180,6 +191,14 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
               annotation: model.annotations.get(lastAnnotVar)?.annotation + "," + annotation
             });
           }
+        }
+        break;
+      case 'units':
+        match = line.match(/unit (.+)/);
+        if (match) {
+          const unitName = match[1].split(' ')[0];
+          const unitArgs = match[1].split('=')[1].replace(";", "").trim();
+          model.units.set(unitName, { name: unitName, unit: unitArgs });
         }
         break;
       case 'reactions':
