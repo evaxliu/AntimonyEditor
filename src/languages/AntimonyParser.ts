@@ -47,7 +47,7 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
     displays: new Map()
   };
 
-  let currentSection: 'compartments' | 'species' | 'reactions' | 'declarations' | 'initializations' | 'displays' | null = null;
+  let currentSection: 'compartments' | 'species' | 'reactions' | 'declarations' | 'initializations' | 'displays' | 'functions' | 'annotations' | null = null;
   let lastCompartment: string | null = null;
 
   lines.forEach((line) => {
@@ -71,6 +71,14 @@ export function parseAntimonyModel(antimonyModel: string): AntimonyModel {
 
     if (line.trim().startsWith('species')) {
       currentSection = 'species';
+    }
+
+    if (line.trim().startsWith('function') && line.trim().endsWith(')')) {
+      currentSection = 'functions';
+    }
+
+    if (line.includes('http')) {
+      currentSection = 'annotations';
     }
 
     if (line.includes(':')) {

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as monaco from 'monaco-editor';
 import { antimonyLanguage } from '../languages/AntimonyLanguage';
 import { antimonyTheme } from '../languages/AntimonyTheme';
@@ -799,6 +799,8 @@ const AntimonyEditor = ({emitter}: Props) => {
 
   let editor: any;
 
+  let model: string;
+
   const monacoRef = useRef<Monaco>();
 
   const doSave = () => {
@@ -848,6 +850,15 @@ const AntimonyEditor = ({emitter}: Props) => {
 
       let parsedModel = parseAntimonyModel(editor.getValue());
       console.log(parsedModel)
+
+      const navAnnots = () => {
+        model = editor.getValue().split('\n');
+        for (let i = 0; i < model.length; i++) {
+          if (model[i].includes("// CV Terms:")) {
+            console.log("Yes, there are annotations")
+          }
+        }
+      }
 
       // Register the hover provider
       monaco.languages.registerHoverProvider('antimony', {

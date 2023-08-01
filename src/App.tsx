@@ -4,12 +4,25 @@ import AntimonyEditor from "./editor/AntimonyEditor";
 import FileList from "./fileexplorer/FileList";
 import EventEmitter from "eventemitter3";
 import './App.css'
+import React from 'react';
 
 type Props = {
   emitter: EventEmitter<string | symbol, any>;
 }
 
-const App = ({emitter}: Props) => {
+interface Model {
+  modeldata: string;
+}
+
+const App: React.FC<Model & Props> = ({modeldata, emitter}) => {
+  const getData = (data: string) =>{
+    modeldata = data;
+  }
+
+  const navAnnots = () => {
+    console.log(modeldata);
+  }
+
   return (
     <div className='app' style={{height: '100%'}}>
       <div className="wrapper">
@@ -59,7 +72,7 @@ const App = ({emitter}: Props) => {
         </div>
         <div className="right">
           <button className='menu-button' style={{cursor:'pointer'}}>Create Annotations</button>
-          <button className='menu-button' style={{cursor:'pointer'}}>Navigate to Edit Annotations</button>
+          <button onClick={navAnnots} className='menu-button' style={{cursor:'pointer'}}>Navigate to Edit Annotations</button>
           <button className='menu-button' style={{cursor:'pointer'}}>Insert Rate Law</button>
           <button className='menu-button' style={{cursor:'pointer'}}>Browse Biomodels</button>
           <button className='menu-button' style={{cursor:'pointer'}}>Convert to SBML</button>
