@@ -896,7 +896,9 @@ const AntimonyEditor = ({emitter}: Props) => {
             }
             if (parsedModel.initializations.has(word.word)) {
               const initializationInfo = parsedModel.initializations.get(word.word);
-              hoverContents.push({ value: `Initialized Value: ${initializationInfo?.value}` });
+              hoverContents.push(
+                { supportHtml: true,
+                  value: `Initialized Value: <span style="color:#DEF9CB;">${initializationInfo?.value}</span>` });
             }
             if (parsedModel.annotations.has(word.word)) {
               const annotationInfo = parsedModel.annotations.get(word.word);
