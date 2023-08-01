@@ -27,7 +27,7 @@ interface Display {
   name: string;
 }
 
-interface AntimonyModel {
+export interface AntimonyModel {
   compartments: Map<string, Compartment>;
   species: Map<string, Species>;
   reactions: Map<string, Reaction>;

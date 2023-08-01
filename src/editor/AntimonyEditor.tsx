@@ -7,10 +7,10 @@ import { Uri } from 'monaco-editor';
 import {FileTreeEntry, SaveFileArgs} from "../fileexplorer/typedefs";
 import EventEmitter from "eventemitter3";
 // import parseAntimonyModel from '../languages/AntimonyParser'
-import { parseAntimonyModel } from '../languages/AntimonyParser'
+import { AntimonyModel, parseAntimonyModel } from '../languages/AntimonyParser'
 import { hover } from '@testing-library/user-event/dist/hover';
 import { searchModels } from '../features/BrowseBiomodels';
-
+import { ParseTreeNode, createParseTree } from '../languages/AntimonyParseTreeBuilder';
 
 type Monaco = typeof monaco
 
@@ -847,10 +847,19 @@ const AntimonyEditor = ({emitter}: Props) => {
         ],
       });
 
-      let parsedModel = parseAntimonyModel(editor.getValue());
-      console.log(parsedModel)
+      const antimonyModel: AntimonyModel = parseAntimonyModel(editor.getValue());
+      const parsedArray = [antimonyModel];
+      const parseTree: ParseTreeNode[] = createParseTree(parsedArray);
 
-      // let searchedModel = searchModels('glycolysis')
+      console.log(antimonyModel)
+      console.log(parseTree)
+
+
+      editor.onDidChangeModelContent(() => {
+        const antimonyModel: AntimonyModel = parseAntimonyModel(editor.getValue());
+        const parsedArray = [antimonyModel];
+        const parseTree: ParseTreeNode[] = createParseTree(parsedArray);
+      })
 
       // Register the hover provider
       monaco.languages.registerHoverProvider('antimony', {
@@ -859,23 +868,23 @@ const AntimonyEditor = ({emitter}: Props) => {
           let hoverContents: monaco.IMarkdownString[] = [];
       
           if (word) {
-            if (parsedModel.displays.has(word.word)){
-              const displayName = parsedModel.displays.get(word.word);
+            if (antimonyModel.displays.has(word.word)){
+              const displayName = antimonyModel.displays.get(word.word);
               hoverContents.push({ value: `"${displayName?.name}"`})
             }
-            if (parsedModel.species.has(word.word)) {
-              const speciesInfo = parsedModel.species.get(word.word);
+            if (antimonyModel.species.has(word.word)) {
+              const speciesInfo = antimonyModel.species.get(word.word);
               hoverContents.push(
                 { value: `**(species)** ${speciesInfo?.name}`},
                 { value: `In compartment: ${speciesInfo?.compartment}` }
               );
             }
-            if (parsedModel.reactions.has(word.word)) {
-              const reactInfo = parsedModel.reactions.get(word.word);
+            if (antimonyModel.reactions.has(word.word)) {
+              const reactInfo = antimonyModel.reactions.get(word.word);
               hoverContents.push({ value: `**(reaction)** ${reactInfo?.name}` });
             }
-            if (parsedModel.initializations.has(word.word)) {
-              const initializationInfo = parsedModel.initializations.get(word.word);
+            if (antimonyModel.initializations.has(word.word)) {
+              const initializationInfo = antimonyModel.initializations.get(word.word);
               hoverContents.push({ value: `Initialized Value: ${initializationInfo?.value}` });
             }
             return {
