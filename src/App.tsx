@@ -3,6 +3,7 @@ import {SolidSplitter} from './CustomSplitters';
 import AntimonyEditor from "./editor/AntimonyEditor";
 import FileList from "./fileexplorer/FileList";
 import EventEmitter from "eventemitter3";
+import { searchModels } from './features/BrowseBiomodels';
 import './App.css'
 
 type Props = {

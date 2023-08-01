@@ -9,6 +9,7 @@ import EventEmitter from "eventemitter3";
 // import parseAntimonyModel from '../languages/AntimonyParser'
 import { parseAntimonyModel } from '../languages/AntimonyParser'
 import { hover } from '@testing-library/user-event/dist/hover';
+import { searchModels } from '../features/BrowseBiomodels';
 
 
 type Monaco = typeof monaco
@@ -848,6 +849,8 @@ const AntimonyEditor = ({emitter}: Props) => {
 
       let parsedModel = parseAntimonyModel(editor.getValue());
       console.log(parsedModel)
+
+      // let searchedModel = searchModels('glycolysis')
 
       // Register the hover provider
       monaco.languages.registerHoverProvider('antimony', {
