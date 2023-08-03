@@ -18,293 +18,6 @@ type Props = {
   emitter: EventEmitter<string | symbol, any>;
 }
 
-let origAnt = [
-  '// Created by libAntimony v2.12.0.3',
-  'model *BIOMD0000000001()',
-  '',
-  '  // Compartments and Species:',
-  '  compartment comp1;',
-  '  species BLL in comp1, IL in comp1, AL in comp1, A in comp1, BL in comp1;',
-  '  species B in comp1, DLL in comp1, D in comp1, ILL in comp1, DL in comp1;',
-  '  species I in comp1, ALL in comp1, BwLL;',
-  '',
-  '  // Reactions:',
-  '  React0: B -> BL; comp1*(kf_0*B - kr_0*BL);',
-  '  React1: BL -> BLL; comp1*(kf_1*BL - kr_1*BLL);',
-  '  React2: BwLL -> ALL; comp1*(kf_2*BLL - kr_2*ALL);',
-  '  React3: A -> AL; comp1*(kf_3*A - kr_3*AL);',
-  '  React4: AL -> ALL; comp1*(kf_4*AL - kr_4*ALL);',
-  '  React5: B -> A; comp1*(kf_5*B - kr_5*A);',
-  '  React6: BL -> AL; comp1*(kf_6*BL - kr_6*AL);',
-  '  React7: I -> IL; comp1*(kf_7*I - kr_7*IL);',
-  '  React8: IL -> ILL; comp1*(kf_8*IL - kr_8*ILL);',
-  '  React9: A -> I; comp1*(kf_9*A - kr_9*I);',
-  '  React10: AL -> IL; comp1*(kf_10*AL - kr_10*IL);',
-  '  React11: ALL -> ILL; comp1*(kf_11*ALL - kr_11*ILL);',
-  '  React12: D -> DL; comp1*(kf_12*D - kr_12*DL);',
-  '  React13: DL -> DLL; comp1*(kf_13*DL - kr_13*DLL);',
-  '  React14: I -> D; comp1*(kf_14*I - kr_14*D);',
-  '  React15: IL -> DL; comp1*(kf_15*IL - kr_15*DL);',
-  '  React16: ILL -> DLL; comp1*(kf_16*ILL - kr_16*DLL);',
-  '',
-  '  // Events:',
-  '  RemovalACh: at time > t2: kf_13 = 0, kf_8 = 0, kf_4 = 0, kf_1 = 0, kf_12 = 0, kf_7 = 0, kf_3 = 0, kf_0 = 0;',
-  '',
-  '  // Species initializations:',
-  '  BLL = 0;',
-  '  IL = 0;',
-  '  AL = 0;',
-  '  A = 0;',
-  '  BL = 0;',
-  '  B = 1.66057788110262e-21/comp1;',
-  '  DLL = 0;',
-  '  D = 0;',
-  '  ILL = 0;',
-  '  DL = 0;',
-  '  I = 0;',
-  '  ALL = 0;',
-  '  BwLL = 3;',
-  '',
-  '  // Compartment initializations:',
-  '  comp1 = 1e-16;',
-  '',
-  '  // Variable initializations:',
-  '  t2 = 20;',
-  '  kf_0 = 30002;',
-  '  kf_3 = 3000;',
-  '  kf_7 = 3000;',
-  '  kf_12 = 3000;',
-  '  kf_1 = 1500;',
-  '  kf_4 = 1500;',
-  '  kf_8 = 1500;',
-  '  kf_13 = 1500;',
-  '  kr_0 = 8000;',
-  '  kr_1 = 16000;',
-  '  kf_2 = 30000;',
-  '  kr_2 = 700;',
-  '  kr_3 = 8.64;',
-  '  kr_4 = 17.28;',
-  '  kf_5 = 0.54;',
-  '  kr_5 = 10800;',
-  '  kf_6 = 130;',
-  '  kr_6 = 2740;',
-  '  kr_7 = 4;',
-  '  kr_8 = 8;',
-  '  kf_9 = 19.7;',
-  '  kr_9 = 3.74;',
-  '  kf_10 = 19.85;',
-  '  kr_10 = 1.74;',
-  '  kf_11 = 20;',
-  '  kr_11 = 0.81;',
-  '  kr_12 = 4;',
-  '  kr_13 = 8;',
-  '  kf_14 = 0.05;',
-  '  kr_14 = 0.0012;',
-  '  kf_15 = 0.05;',
-  '  kr_15 = 0.0012;',
-  '  kf_16 = 0.05;',
-  '  kr_16 = 0.0012;',
-
-  '  // Other declarations:',
-  '  var kf_0, kf_3, kf_7, kf_12, kf_1, kf_4, kf_8, kf_13;',
-  '  const comp1, t2, kr_0, kr_1, kf_2, kr_2, kr_3, kr_4, kf_5, kr_5, kf_6, kr_6;',
-  '  const kr_7, kr_8, kf_9, kr_9, kf_10, kr_10, kf_11, kr_11, kr_12, kr_13;',
-  '  const kf_14, kr_14, kf_15, kr_15, kf_16, kr_16;',
-  '',
-  '  // Display Names:',
-  '  comp1 is "compartment1;"',
-  '  BLL is "BasalACh2;"',
-  '  IL is "IntermediateACh;"',
-  '  AL is "ActiveACh;"',
-  '  A is "Active;"',
-  '  BL is "BasalACh;"',
-  '  B is "Basal;"',
-  '  DLL is "DesensitisedACh2;"',
-  '  D is "Desensitised;"',
-  '  ILL is "IntermediateACh2;"',
-  '  DL is "DesensitisedACh;"',
-  '  I is "Intermediate;"',
-  '  ALL is "ActiveACh2;"',
-  '  RemovalACh is "removal of ACh;"',
-  '',
-  '',
-  '  BLL identity "http://identifiers.org/chebi/CHEBI:27732"',
-  'end'
-].join('\n')
-
-let newAnt = `
-// Created by libAntimony v2.13.2
-function Constant_flux__irreversible(v)
-  v;
-end
-
-Constant_flux__irreversible is "Constant flux (irreversible)"
-
-function Function_for_Tumor_Growth_1(a, T_1, b)
-  a*T_1*(1 - b*T_1);
-end
-
-Function_for_Tumor_Growth_1 is "Function_for_Tumor_Growth_1"
-
-function Function_for_E1_Depletion(c_3, T_1, T_2, E_1)
-  c_3*(T_1 + T_2)*E_1;
-end
-
-Function_for_E1_Depletion is "Function_for_E1_Depletion"
-
-function Function_for_Tumor_Killing_T1_E1(mu, E_1, T_1)
-  mu*E_1*T_1;
-end
-
-Function_for_Tumor_Killing_T1_E1 is "Function_for_Tumor_Killing_T1_E1"
-
-function Function_for_E2_Recruitment(d_1, T_1, E_1)
-  d_1*T_1*E_1;
-end
-
-Function_for_E2_Recruitment is "Function_for_E2_Recruitment"
-
-function Function_for_E2_Depletion(d_2, T_1, E_2)
-  d_2*T_1*E_2;
-end
-
-Function_for_E2_Depletion is "Function_for_E2_Depletion"
-
-function Function_for_Tumor_Competition_1(nu, T_1, T_2)
-  nu*T_1*T_2;
-end
-
-Function_for_Tumor_Competition_1 is "Function_for_Tumor_Competition_1"
-
-function Function_for_E1_Recruitment(c_4, T_1, s, T_2, E_1, c_5)
-  c_4*(T_1 + s*T_2)*E_1/(c_5 + T_1 + T_2);
-end
-
-Function_for_E1_Recruitment is "Function_for_E1_Recruitment"
-
-function Function_for_Tumor_Killing_T1_E2(beta, E_2, T_1)
-  beta*E_2*T_1;
-end
-
-Function_for_Tumor_Killing_T1_E2 is "Function_for_Tumor_Killing_T1_E2"
-
-function Function_for_Tumor_Killing_T2_E1(q, E_1, T_2, mu)
-  mu*q*E_1*T_2;
-end
-
-Function_for_Tumor_Killing_T2_E1 is "Function_for_Tumor_Killing_T2_E1"
-
-function Function_for_Tumor_Competition_2(r, nu, T_1, T_2)
-  r*nu*T_1*T_2;
-end
-
-Function_for_Tumor_Competition_2 is "Function_for_Tumor_Competition_2"
-
-function Function_for_Tumor_Growth_2(a, p, T_2, b)
-  a*p*T_2*(1 - b*T_2);
-end
-
-Function_for_Tumor_Growth_2 is "Function_for_Tumor_Growth_2"
-
-
-model *Alvarez2019___A_nonlinear_mathematical_model_of_cell_mediated_immune_response_for_tumor_phenotypic_heterogeneity()
-
-  // Compartments and Species:
-  compartment compartment_;
-  species T_1 in compartment_, T_2 in compartment_, E_1_Innate in compartment_;
-  species E_2_Adaptive in compartment_;
-
-  // Assignment Rules:
-  T_Total := T_1 + T_2;
-
-  // Reactions:
-  Tumor_Growth_1:  => T_1; compartment_*Function_for_Tumor_Growth_1(a, T_1, b);
-  Tumor_Growth_2:  => T_2; compartment_*Function_for_Tumor_Growth_2(a, p, T_2, b);
-  Tumor_Killing_T1_E1: T_1 => ; compartment_*Function_for_Tumor_Killing_T1_E1(mu, E_1_Innate, T_1);
-  Tumor_Killing_T1_E2: T_1 => ; compartment_*Function_for_Tumor_Killing_T1_E2(beta, E_2_Adaptive, T_1);
-  Tumor_Competition_1: T_1 => ; compartment_*Function_for_Tumor_Competition_1(nu, T_1, T_2);
-  Tumor_Competition_2: T_2 => ; compartment_*Function_for_Tumor_Competition_2(r, nu, T_1, T_2);
-  Tumor_Killing_T2_E1: T_2 => ; compartment_*Function_for_Tumor_Killing_T2_E1(q, E_1_Innate, T_2, mu);
-  E1_Production_Constant:  => E_1_Innate; compartment_*Constant_flux__irreversible(c_1);
-  E1_Death: E_1_Innate => ; compartment_*c_2*E_1_Innate;
-  E1_Depletion: E_1_Innate => ; compartment_*Function_for_E1_Depletion(c_3, T_1, T_2, E_1_Innate);
-  E1_Recruitment:  => E_1_Innate; compartment_*Function_for_E1_Recruitment(c_4, T_1, s, T_2, E_1_Innate, c_5);
-  E2_Recruitment:  => E_2_Adaptive; compartment_*Function_for_E2_Recruitment(d_1, T_1, E_1_Innate);
-  E2_Depletion: E_2_Adaptive => ; compartment_*Function_for_E2_Depletion(d_2, T_1, E_2_Adaptive);
-  E2_Death: E_2_Adaptive => ; compartment_*d_3*E_2_Adaptive;
-
-  // Species initializations:
-  T_1 = 80000000;
-  T_2 = 20000000;
-  E_1_Innate = 10500000;
-  E_2_Adaptive = 0;
-
-  // Compartment initializations:
-  compartment_ = 1;
-
-  // Variable initializations:
-  a = 0.514;
-  b = 2e-09;
-  mu = 1.101e-07;
-  beta = 1.101e-10;
-  nu = 1.101e-09;
-  c_1 = 13000;
-  c_2 = 0.0412;
-  c_3 = 3.422e-10;
-  c_4 = 0.1245;
-  c_5 = 20193000;
-  d_1 = 1.1e-07;
-  d_2 = 3.42e-10;
-  d_3 = 0.02;
-  p = 0.35;
-  q = 1;
-  r = 1.5;
-  s = 1;
-
-  // Other declarations:
-  var T_Total;
-  const compartment_, a, b, mu, beta, nu, c_1, c_2, c_3, c_4, c_5, d_1, d_2;
-  const d_3, p, q, r, s;
-
-  // Unit definitions:
-  unit volume = 1e-3 litre;
-  unit substance = item;
-
-  // Display Names:
-  compartment_ is "compartment";
-
-  // CV terms:
-  compartment_ hypernym "http://identifiers.org/ncit/C94498"
-  T_1 identity "http://identifiers.org/cl/CL:0001063"
-  T_2 identity "http://identifiers.org/cl/CL:0001063"
-  E_1_Innate hypernym "http://identifiers.org/cl/CL:0000623"
-  E_1_Innate hypernym "http://identifiers.org/cl/CL:0001065"
-  E_2_Adaptive hypernym "http://identifiers.org/cl/CL:0000084"
-  Tumor_Growth_1 hypernym "http://identifiers.org/ncit/C18081"
-  Tumor_Growth_2 hypernym "http://identifiers.org/ncit/C18081"
-  Tumor_Killing_T1_E1 hypernym "http://identifiers.org/go/GO:0002420"
-  Tumor_Killing_T1_E2 hypernym "http://identifiers.org/go/GO:0002419"
-  Tumor_Competition_1 hypernym "http://identifiers.org/go/GO:0035212"
-  Tumor_Competition_2 hypernym "http://identifiers.org/go/GO:0035212"
-  Tumor_Killing_T2_E1 hypernym "http://identifiers.org/go/GO:0002420"
-  E1_Production_Constant hypernym "http://identifiers.org/ncit/C18081"
-  E1_Death hypernym "http://identifiers.org/go/GO:0008219"
-  E1_Depletion hypernym "http://identifiers.org/go/GO:0008219"
-  E1_Recruitment hypernym "http://identifiers.org/go/GO:0030101"
-  E2_Recruitment hypernym "http://identifiers.org/go/GO:0072683"
-  E2_Depletion hypernym "http://identifiers.org/go/GO:0008219"
-  E2_Death hypernym "http://identifiers.org/go/GO:0008219"
-end
-
-Alvarez2019___A_nonlinear_mathematical_model_of_cell_mediated_immune_response_for_tumor_phenotypic_heterogeneity is "Alvarez2019 - A nonlinear mathematical model of cell-mediated immune response for tumor phenotypic heterogeneity"
-
-Alvarez2019___A_nonlinear_mathematical_model_of_cell_mediated_immune_response_for_tumor_phenotypic_heterogeneity description "http://identifiers.org/pubmed/30930063"
-Alvarez2019___A_nonlinear_mathematical_model_of_cell_mediated_immune_response_for_tumor_phenotypic_heterogeneity model_entity_is "http://identifiers.org/biomodels.db/MODEL1908120003",
-                                                                                                                                 "http://identifiers.org/biomodels.db/BIOMD0000000790"
-Alvarez2019___A_nonlinear_mathematical_model_of_cell_mediated_immune_response_for_tumor_phenotypic_heterogeneity property "http://identifiers.org/mamo/MAMO_0000046"
-Alvarez2019___A_nonlinear_mathematical_model_of_cell_mediated_immune_response_for_tumor_phenotypic_heterogeneity property "http://identifiers.org/go/GO:0002418"
-`
-
 let newAnt2 = `
 // Created by libAntimony v2.13.2
 function function_17(substrate, Km, V)
@@ -796,29 +509,29 @@ Model_1 identity "http://identifiers.org/kegg.pathway/tbr00010"
 const AntimonyEditor = ({emitter}: Props) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
 
-  const [getCurrentModel, setCurrentModel] = useState<Uri>();
+  const savedModel = localStorage.getItem('savedModel') || newAnt2;
 
   let editor: any;
 
   const monacoRef = useRef<Monaco>();
 
-  const doSave = () => {
-    if (!!getCurrentModel) {
-        if (!!monacoRef.current) {
-            if (!!monacoRef.current.editor) {
-                const model = monacoRef.current.editor.getModel(getCurrentModel)
-                if (!!model) {
-                    const args: SaveFileArgs = {
-                        filepath: getCurrentModel.path,
-                        data: model.getValue(),
-                    }
-                    emitter.emit("DO_SAVE_FILE", args)
-                    console.log("done")
-                }
-            }
-        }
-    }
-}
+  // const doSave = () => {
+  //   if (!!getCurrentModel) {
+  //       if (!!monacoRef.current) {
+  //           if (!!monacoRef.current.editor) {
+  //               const model = monacoRef.current.editor.getModel(getCurrentModel)
+  //               if (!!model) {
+  //                   const args: SaveFileArgs = {
+  //                       filepath: getCurrentModel.path,
+  //                       data: model.getValue(),
+  //                   }
+  //                   emitter.emit("DO_SAVE_FILE", args)
+  //                   console.log("done")
+  //               }
+  //           }
+  //       }
+  //   }
+  // }
 
   useEffect(() => {
     if (editorRef.current) {
@@ -833,7 +546,7 @@ const AntimonyEditor = ({emitter}: Props) => {
       // Create the Monaco Editor instance
       editor = monaco.editor.create(editorRef.current, {
         bracketPairColorization: { enabled: true }, // Enable bracket pair colorization
-        value: newAnt2,
+        value: savedModel,
         language: 'antimony', // Use your custom language
       });
 
@@ -849,6 +562,10 @@ const AntimonyEditor = ({emitter}: Props) => {
 
       let parsedModel = parseAntimonyModel(editor.getValue());
       console.log(parsedModel)
+
+      editor.onDidChangeModelContent(() => {
+        localStorage.setItem('savedModel', editor.getValue());
+      });
 
       // let searchedModel = searchModels('glycolysis')
 
@@ -932,7 +649,7 @@ const AntimonyEditor = ({emitter}: Props) => {
 
   return (
     <div>
-      {(getCurrentModel) &&
+      {/* {(getCurrentModel) && */}
       <>
         <style>
           {`
@@ -965,7 +682,7 @@ const AntimonyEditor = ({emitter}: Props) => {
         <div>
           <Tabs/>
         </div>
-        {!!getCurrentModel &&
+        {/* {!!getCurrentModel &&
           <div style={{
               "backgroundColor": "#343539",
               "padding": "4px",
@@ -982,9 +699,9 @@ const AntimonyEditor = ({emitter}: Props) => {
             &nbsp;&nbsp;&nbsp;
             {getCurrentModel.path}
           </div>
-          }
+          } */}
       </>
-      }
+      {/* } */}
       <div id="ant-edit" ref={editorRef} style={{ height: '80vh' }}/>
     </div>
   );
