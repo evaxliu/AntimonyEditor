@@ -39,12 +39,12 @@ const App = ({emitter}: Props) => {
               <button style={{cursor:'pointer'}}>Upload Files</button> <br/> <br/>
               <a> File Tree Goes Here </a>
             </div>        
-            <Split
+            {/* <Split
               renderSplitter={() => <SolidSplitter />}
               splitterSize='3px'
               horizontal
               initialPrimarySize='80%'
-            >
+            > */}
               <div style={{"height": "100%"}}>
                 {/* <MultiFileEditor emitter={emitter}/> */}
                 <AntimonyEditor emitter={emitter}/>
@@ -55,7 +55,7 @@ const App = ({emitter}: Props) => {
                   <iframe style={{"width": "100%", "height": "100%"}}/>
                 </div>
               </div>
-            </Split>
+            {/* </Split> */}
           </Split>
         </div>
         <div className="right">
