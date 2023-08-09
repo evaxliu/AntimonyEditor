@@ -564,7 +564,6 @@ const AntimonyEditor = ({emitter}: Props) => {
       console.log(parsedModel)
 
       editor.onDidChangeModelContent(() => {
-        localStorage.setItem('savedModel', editor.getValue());
       });
 
       // let searchedModel = searchModels('glycolysis')
@@ -641,8 +640,8 @@ const AntimonyEditor = ({emitter}: Props) => {
     }
   }, []);
 
-  function save(editorUri: monaco.Uri) {
-    monaco.editor.getModel(editorUri);
+  function save() {
+    localStorage.setItem('savedModel', editor.getValue());
   }
 
   // console.log(parseAntimonyModel(newAnt));
@@ -700,6 +699,13 @@ const AntimonyEditor = ({emitter}: Props) => {
             {getCurrentModel.path}
           </div>
           } */}
+          <button onClick={save} style={{cursor:'pointer'}}>Save Changes</button>
+          <button style={{cursor:'pointer'}}>Create Annotations</button>
+          <button style={{cursor:'pointer'}}>Navigate to Edit Annotations</button>
+          <button style={{cursor:'pointer'}}>Insert Rate Law</button>
+          <button style={{cursor:'pointer'}}>Browse Biomodels</button>
+          <button style={{cursor:'pointer'}}>Convert to SBML</button>
+          <button style={{cursor:'pointer'}}>Turn Annotated Variable Highlight Off</button>
       </>
       {/* } */}
       <div id="ant-edit" ref={editorRef} style={{ height: '80vh' }}/>

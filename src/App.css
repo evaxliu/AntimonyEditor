@@ -1,13 +1,13 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 8%; /* Two columns: one for the middle app, one for the new split component */
+    grid-template-columns: 1fr; /* Two columns: one for the middle app, one for the new split component */
     grid-template-rows: auto 1fr auto;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-        "top top"
-        "middle right" /* The new split component will go on the right */
-        "bottom bottom";
+        "top"
+        "middle" /* The new split component will go on the right */
+        "bottom";
     width: 100%;
     height: 100%;
 }
@@ -20,25 +20,6 @@
 
 .middle { 
     grid-area: middle; 
-}
-
-.right {
-    grid-area: right; /* The new split component */
-    background-color: #1c1c1c;
-    color: white;
-    display: flex; /* Use Flexbox to arrange the buttons horizontally */
-    flex-direction: column; /* Stack the buttons vertically */
-    align-items: center; /* Center the buttons horizontally */
-    justify-content: center; /* Center the buttons vertically */
-    padding: 10px; /* Adjust the padding for spacing */
-    border-left: 3px solid #474757; /* Add a left border with the specified color */
-}
-
-.menu-button {
-    cursor: pointer;
-    margin-bottom: 10px; /* Add some space between the buttons */
-    width: 100%; /* Make the buttons take up the full width of the "right" div */
-    max-width: 200px; /* Limit the maximum width of the buttons to avoid overlap */
 }
 
 .bottom { 

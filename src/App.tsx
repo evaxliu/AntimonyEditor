@@ -58,14 +58,6 @@ const App = ({emitter}: Props) => {
             {/* </Split> */}
           </Split>
         </div>
-        <div className="right">
-          <button className='menu-button' style={{cursor:'pointer'}}>Create Annotations</button>
-          <button className='menu-button' style={{cursor:'pointer'}}>Navigate to Edit Annotations</button>
-          <button className='menu-button' style={{cursor:'pointer'}}>Insert Rate Law</button>
-          <button className='menu-button' style={{cursor:'pointer'}}>Browse Biomodels</button>
-          <button className='menu-button' style={{cursor:'pointer'}}>Convert to SBML</button>
-          <button className='menu-button' style={{cursor:'pointer'}}>Turn Annotated Variable Highlight Off</button>
-        </div>
         <div className="bottom" style={{backgroundColor: '#1c1c1c', color:'white'}}>Copyright © 2023 Center for Reproducible Biomedical Modeling</div>
       </div>
     </div>
