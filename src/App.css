@@ -49,3 +49,7 @@
     text-shadow: none;
     white-space: nowrap;
 }
+
+.button:hover {
+    color: white;
+}
