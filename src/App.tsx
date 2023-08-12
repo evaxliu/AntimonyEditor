@@ -5,6 +5,7 @@ import FileList from "./fileexplorer/FileList";
 import EventEmitter from "eventemitter3";
 import { searchModels } from './features/BrowseBiomodels';
 import './App.css'
+import { BsUpload } from 'react-icons/bs';
 
 type Props = {
   emitter: EventEmitter<string | symbol, any>;
@@ -36,7 +37,8 @@ const App = ({emitter}: Props) => {
                   </div>
               </ShadowDom> */}
               <FileList />
-              <button style={{cursor:'pointer'}}>Upload Files</button> <br/> <br/>
+              <BsUpload style={{padding: '4px 0 0 7px'}}/>
+              <button className='button'>Upload Files</button> <br/> <br/>
               <a> File Tree Goes Here </a>
             </div>        
             {/* <Split

@@ -653,11 +653,12 @@ const AntimonyEditor = ({emitter}: Props) => {
         <style>
           {`
             .smallbutton {
-                background-color: #444857;
+                background-color: #1c1c1c;
                 border-radius: 2px;
                 border-style: dotted;
                 border-width: 1px;
-                color: #cccccc;
+                border-color: #1c1c1c;
+                color: #B7B7B7;
                 cursor: pointer;
                 display: inline-block;
                 font-size: 1em;
@@ -671,11 +672,16 @@ const AntimonyEditor = ({emitter}: Props) => {
                 text-overflow: ellipsis;
                 text-shadow: none;
                 white-space: nowrap;
-                }
+            }
             .smallbutton:hover {
-                background-color: #5c5e73;
                 color: white;
-                }
+            }
+            .menu {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 4px;
+            }
           `}
         </style>
         <div>
@@ -699,13 +705,15 @@ const AntimonyEditor = ({emitter}: Props) => {
             {getCurrentModel.path}
           </div>
           } */}
-          <button onClick={save} style={{cursor:'pointer'}}>Save Changes</button>
-          <button style={{cursor:'pointer'}}>Create Annotations</button>
-          <button style={{cursor:'pointer'}}>Navigate to Edit Annotations</button>
-          <button style={{cursor:'pointer'}}>Insert Rate Law</button>
-          <button style={{cursor:'pointer'}}>Browse Biomodels</button>
-          <button style={{cursor:'pointer'}}>Convert to SBML</button>
-          <button style={{cursor:'pointer'}}>Turn Annotated Variable Highlight Off</button>
+        <div className='menu'>
+          <button className='smallbutton' onClick={save}>Save Changes</button>
+          <button className='smallbutton'>Create Annotations</button>
+          <button className='smallbutton'>Navigate to Edit Annotations</button>
+          <button className='smallbutton'>Insert Rate Law</button>
+          <button className='smallbutton'>Browse Biomodels</button>
+          <button className='smallbutton'>Convert to SBML</button>
+          <button className='smallbutton'>Annotated Variable Highlight Off</button>
+        </div>
       </>
       {/* } */}
       <div id="ant-edit" ref={editorRef} style={{ height: '80vh' }}/>
