@@ -62,7 +62,7 @@ const AntimonyEditor = () => {
   async function getBiomodel(modelId: string) {
     const proxy = "https://api.allorigins.win/raw?url=";
     // const searchUrl = `http://localhost:3001/download?models=${modelId}`;
-    const searchUrl = proxy + `http://www.ebi.ac.uk/biomodels/search/download?models=${modelId}`;
+    const searchUrl = proxy + `https://www.ebi.ac.uk/biomodels/model/download/${modelId}?filename=${modelId}_url.xml`;
     // const searchUrl = `https://www.ebi.ac.uk/biomodels/model/download/${modelId}?filename=${modelId}.xml`;
     
     try {
