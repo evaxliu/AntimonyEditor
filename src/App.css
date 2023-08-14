@@ -43,7 +43,7 @@ input[type="file"]::file-selector-button,
     font-weight: normal !important;
     line-height: 1.2;
     margin: 0 3px 0 0;
-    padding: 2px 7px;
+    padding: 7px 7px;
     position: relative;
     text-align: center;
     text-decoration: none !important;
