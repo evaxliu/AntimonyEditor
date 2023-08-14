@@ -28,7 +28,9 @@
     border-top: 3px solid #474757; 
 }
 
-.button {
+input[type="file"]::file-selector-button,
+#xml-download-wrapper button,
+#xml-import-wrapper button {
     background-color: #1c1c1c;
     border-radius: 2px;
     border-style: dotted;
@@ -48,8 +50,4 @@
     text-overflow: ellipsis;
     text-shadow: none;
     white-space: nowrap;
-}
-
-.button:hover {
-    color: white;
 }

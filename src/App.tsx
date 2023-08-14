@@ -2,16 +2,12 @@ import {Split} from '@geoffcox/react-splitter';
 import {SolidSplitter} from './CustomSplitters';
 import AntimonyEditor from "./editor/AntimonyEditor";
 import FileList from "./fileexplorer/FileList";
-import EventEmitter from "eventemitter3";
 import { searchModels } from './features/BrowseBiomodels';
 import './App.css'
 import { BsUpload } from 'react-icons/bs';
+import FileUploader from './fileexplorer/FileUploader'
 
-type Props = {
-  emitter: EventEmitter<string | symbol, any>;
-}
-
-const App = ({emitter}: Props) => {
+const App = () => {
   return (
     <div className='app' style={{height: '100%'}}>
       <div className="wrapper">
@@ -19,7 +15,6 @@ const App = ({emitter}: Props) => {
           The Official Antimony Web Code Editor
           <div className="float-end" style={{"fontSize": ".5em"}}>
             <a href={"https://reproduciblebiomodels.org/"}>
-              {/* <img style={{"width": "48px", "marginRight": "10px"}} src={"GitHub-Mark-Light-64px.png"}/> */}
               https://reproduciblebiomodels.org/
             </a>
           </div>
@@ -27,19 +22,13 @@ const App = ({emitter}: Props) => {
         <div className="middle App" style={{"backgroundColor": "#1c1c1c", color:'white'}}>
           <Split
             renderSplitter={() => <SolidSplitter/>}
-            initialPrimarySize='12%'
+            initialPrimarySize='14%'
             splitterSize='3px'
           >
             <div style={{"height": "100%", "overflowY": "scroll"}}>
-              {/* <ShadowDom>
-                  <div style={{"padding": "10px"}}>
-                      <FiletreeRoot emitter={emitter}/>
-                  </div>
-              </ShadowDom> */}
-              <FileList />
-              <BsUpload style={{padding: '4px 0 0 7px'}}/>
-              <button className='button'>Upload Files</button> <br/> <br/>
-              <a> File Tree Goes Here </a>
+              <FileUploader/>
+              {/* <BsUpload style={{padding: '4px 0 0 7px'}}/> */}
+              {/* <input type='file' className='choosefile' /> <br/> */}
             </div>        
             {/* <Split
               renderSplitter={() => <SolidSplitter />}
@@ -48,8 +37,7 @@ const App = ({emitter}: Props) => {
               initialPrimarySize='80%'
             > */}
               <div style={{"height": "100%"}}>
-                {/* <MultiFileEditor emitter={emitter}/> */}
-                <AntimonyEditor emitter={emitter}/>
+                <AntimonyEditor/>
               </div>
               Logs Here
               <div style={{"padding": "100px", "width": "100%", "height": "100%"}}>
