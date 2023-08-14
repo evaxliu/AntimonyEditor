@@ -86,7 +86,7 @@ const FileUploader = () => {
         <div>
             <input type="file" ref={fileInputRef} onChange={handleFileUpload} />
             <div>
-                <h2>Uploaded Files:</h2>
+                <h3 style={{textAlign:'center'}}>Don't Forget to Save Files Before Closing Website</h3>
                 <ul>
                     {files.map((file: any) => (
                         <button key={file.name} onClick={() => console.log('File clicked:', file)}>
