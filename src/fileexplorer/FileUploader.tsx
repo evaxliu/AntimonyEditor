@@ -122,13 +122,12 @@ const FileUploader = () => {
             `}</style>
             <input type="file" ref={fileInputRef} onChange={handleFileUpload} />
             <div>
-                <h5 style={{textAlign:'center'}}>Don't Forget to Save Files Before Closing Website</h5>
+                <h5 style={{paddingLeft:'7px'}}>Don't Forget to Save Files Before Closing Website</h5>
                 <ul style={{ listStyle: 'none'}}>
                     {files.map((file: any) => (
                         <li key={file.name}>
                             <button 
                                 key={file.name}
-                                style={{display:'flex', alignItems:'center', justifyContent:'center'}}
                                 className='button' 
                                 onClick={() => console.log('File clicked:', file)}
                             >
