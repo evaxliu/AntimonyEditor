@@ -22,9 +22,6 @@ const FileUploader = () => {
 
                 const storedFiles = await fileStore.getAll();
 
-                // Sort the files in alphanumeric order by file name
-                storedFiles.sort((a, b) => a.data.name.localeCompare(b.data.name, 'en', { numeric: true }));
-
                 setFiles(storedFiles);
             } catch (error) {
                 console.error('Error fetching files from IndexedDB: ', error);
