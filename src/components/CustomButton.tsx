@@ -31,6 +31,7 @@ const CustomButton =  (props: Name) => {
                 }
                 .button:hover {
                     color: white;
+                    background-color: #464646;
                 }
                 .menu {
                     display: flex;

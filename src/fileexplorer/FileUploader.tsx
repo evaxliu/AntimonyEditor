@@ -22,6 +22,8 @@ const FileUploader = () => {
 
                 const storedFiles = await fileStore.getAll();
 
+                storedFiles.sort((a, b) => a.name.localeCompare(b.name, 'en', { numeric: true }));
+
                 setFiles(storedFiles);
             } catch (error) {
                 console.error('Error fetching files from IndexedDB: ', error);
@@ -88,7 +90,7 @@ const FileUploader = () => {
                 .button {
                     background-color: #1c1c1c;
                     border-radius: 2px;
-                    border-style: dotted;
+                    border-style: solid;
                     border-width: 1px;
                     border-color: #1c1c1c;
                     color: #B7B7B7;
@@ -108,6 +110,7 @@ const FileUploader = () => {
                 }
                 .button:hover {
                     color: white;
+                    background-color: #464646;
                 }
                 .menu {
                     display: flex;
@@ -120,18 +123,18 @@ const FileUploader = () => {
             <input type="file" ref={fileInputRef} onChange={handleFileUpload} />
             <div>
                 <h5 style={{textAlign:'center'}}>Don't Forget to Save Files Before Closing Website</h5>
-                <ul>
+                <ul style={{ listStyle: 'none'}}>
                     {files.map((file: any) => (
-                        <>
+                        <li key={file.name}>
                             <button 
+                                key={file.name}
                                 style={{display:'flex', alignItems:'center', justifyContent:'center'}}
                                 className='button' 
-                                key={file.name} 
                                 onClick={() => console.log('File clicked:', file)}
                             >
                                 {file.name}
-                            </button> <br />
-                        </>
+                            </button>
+                        </li>
                     ))}
                 </ul>
             </div>
