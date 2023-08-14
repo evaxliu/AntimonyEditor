@@ -84,14 +84,54 @@ const FileUploader = () => {
 
     return (
         <div>
+            <style>{`
+                .button {
+                    background-color: #1c1c1c;
+                    border-radius: 2px;
+                    border-style: dotted;
+                    border-width: 1px;
+                    border-color: #1c1c1c;
+                    color: #B7B7B7;
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: 1em;
+                    font-weight: normal !important;
+                    line-height: 1.2;
+                    margin: 0 3px 0 0;
+                    padding: 2px 7px;
+                    position: relative;
+                    text-align: center;
+                    text-decoration: none !important;
+                    text-overflow: ellipsis;
+                    text-shadow: none;
+                    white-space: nowrap;
+                }
+                .button:hover {
+                    color: white;
+                }
+                .menu {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4px;
+                    flex-wrap: wrap;
+                }
+            `}</style>
             <input type="file" ref={fileInputRef} onChange={handleFileUpload} />
             <div>
-                <h3 style={{textAlign:'center'}}>Don't Forget to Save Files Before Closing Website</h3>
+                <h5 style={{textAlign:'center'}}>Don't Forget to Save Files Before Closing Website</h5>
                 <ul>
                     {files.map((file: any) => (
-                        <button key={file.name} onClick={() => console.log('File clicked:', file)}>
-                            {file.name}
-                        </button>
+                        <>
+                            <button 
+                                style={{display:'flex', alignItems:'center', justifyContent:'center'}}
+                                className='button' 
+                                key={file.name} 
+                                onClick={() => console.log('File clicked:', file)}
+                            >
+                                {file.name}
+                            </button> <br />
+                        </>
                     ))}
                 </ul>
             </div>
